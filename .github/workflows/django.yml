@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       max-parallel: 4
       matrix:
@@ -17,6 +17,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: echo env
+      run: |
+        echo "head branch : ${{ github.GITHUB_HEAD_REF }}"
+        echo "base branch: ${{ github.GITHUB_BASE_REF }}"
+        echo "event name: ${{ github.GITHUB_EVENT_NAME }}"
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
